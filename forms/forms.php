@@ -3,7 +3,7 @@
 class Forms {
     public function signUp() {
 ?>
-        <form action="submit.php" method="post">
+        <form action="/submit.php" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br><br>
             <label for="email">Email:</label>
@@ -17,7 +17,7 @@ class Forms {
 
     public function signIn() {
 ?>
-        <form action="login.php" method="post">
+        <form action="/login.php" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br><br>
             <label for="password">Password:</label>
