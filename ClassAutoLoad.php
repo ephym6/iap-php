@@ -1,6 +1,6 @@
 <?php
 
-require 'config.php';
+require 'config/config.php';
 
 $directory = array('Global', 'layouts', 'forms', 'config');
 
