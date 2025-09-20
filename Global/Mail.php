@@ -55,7 +55,7 @@ class Mail {
 
         try {
             //Recipients
-            $this->mailer->addAddress($config['to_mail'], $config['to_name']);     //Add a recipient
+            $this->mailer->addAddress($clientConfig['to_mail'], $clientConfig['to_name']);     //Add a recipient
             $this->mailer->isHTML(true);
             $this->mailer->Subject = $clientConfig['subject'];
             $this->mailer->Body    = $clientConfig['body'];
