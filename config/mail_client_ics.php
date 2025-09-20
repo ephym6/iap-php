@@ -1,8 +1,6 @@
 <?php
 
-$config = include 'config/mail_client_ics.php';
-
-$toName = $config['to_name'];
+$toName = 'Mbuu';
 
 return [
     'from_email' => 'no-reply@ics2.2.com',
