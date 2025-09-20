@@ -15,8 +15,8 @@ const SITE_LANG = 'en';
 const DB_TYPE = 'mysql';
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
-const DB_PASS = '';
-const DB_NAME = 'iap_php';
+const DB_PASS = 'student';
+const DB_NAME = 'ics_app';
 
 /*
 // Mail configuration
