@@ -1,17 +1,19 @@
 <?php
 
-require 'ClassAutoLoad.php';
+$conn = require_once 'ClassAutoLoad.php';
 
 // Class instances
 $sample = new Sample();
 $layout = new Layouts();
 $forms = new Forms();
-$mail = new Mail();
+$mail = new Mail($conn);
+$register = new Register($conn);
 
 $layout->header();
 
-$forms->signUp();
+$register->handleForm();
+$register->renderForm();
 
-$mail->sendMail();
+// $mail->sendMail();
 
 $layout->footer();
