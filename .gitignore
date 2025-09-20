@@ -105,6 +105,9 @@ $RECYCLE.BIN/
 *.swn
 *.swx
 
+# Ignore sensitive configs
+config/mail_config.php
+
 # ===========================
 # Optional: Frontend (uncomment if applicable)
 # ===========================
