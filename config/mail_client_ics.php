@@ -1,6 +1,6 @@
 <?php
 
-$config = include 'config/mail_config.php';
+$config = include 'config/mail_client_ics.php';
 
 $toName = $config['to_name'];
 

@@ -27,12 +27,12 @@ return [
     'username'   => $config['username'],
     'password'   => $config['password'],
     'port'       => 465,             // or 587 if you use STARTTLS
-    'encryption' => PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS,
+
     'options'    => [  // Disbaled SSL verification (use with caution in production)
       $config['options']
     ],
-    'to_mail'     => $clientConfig['to_mail'],
-    'to_name'     => $clientConfig['to_name'],
+    'to_mail'     => $config['to_mail'],
+    'to_name'     => $config['to_name'],
 
     'from_email' => $clientConfig['from_email'],
     'from_name'  => $clientConfig['from_name'],
