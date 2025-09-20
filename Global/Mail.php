@@ -22,7 +22,12 @@ class Mail {
      */
     public function __construct() {
         //Load Composer's autoloader (created by composer, not included with PHPMailer)
-        require 'plugins/PHPMailer/vendor/autoload.php';
+        if (file_exists('vendor/autoload.php')) {
+            require 'plugins/PHPMailer/vendor/autoload.php';
+        } else {
+            echo "Composer autoload not found. Please run 'composer update in `/plugins/PHPMailer`'.\n";
+            exit(1);
+        }
 
         // Load configuration
         $config = include 'config/mail_config.php';
@@ -48,6 +53,9 @@ class Mail {
         $this->mailer->setFrom($clientConfig['from_email'], $clientConfig['from_name']);
     }
 
+
+
+    /*
     public function sendMail(): void
     {
         $config = include 'config/mail_config.php';
@@ -67,4 +75,5 @@ class Mail {
             echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
         }
     }
+    */
 }
