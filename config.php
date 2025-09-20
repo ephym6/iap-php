@@ -41,3 +41,4 @@ return [
     'body'      => $clientConfig['body'],
     'alt_body'  => $clientConfig['alt_body'],
 ];
+/* MAIL CONFIGURATION DONE */
