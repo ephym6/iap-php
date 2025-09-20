@@ -2,7 +2,7 @@
 
 require 'config.php';
 
-$directory = array('Global', 'layouts', 'forms');
+$directory = array('Global', 'layouts', 'forms', 'config');
 
 spl_autoload_register(function ($className) use ($directory) {
     foreach ($directory as $dir) {
