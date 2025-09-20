@@ -14,8 +14,12 @@ require 'plugins/PHPMailer/src/Exception.php';
 require 'plugins/PHPMailer/src/PHPMailer.php';
 require 'plugins/PHPMailer/src/SMTP.php';
 
+// Load DB connection (returns $conn)
+
+
 class Mail {
     private PHPMailer $mailer;
+    private mysqli $conn;
 
     /**
      * @throws Exception
@@ -53,6 +57,65 @@ class Mail {
         $this->mailer->setFrom($clientConfig['from_email'], $clientConfig['from_name']);
     }
 
+    /**
+     * Validate email, insert user and send a welcome email
+     */
+    public function registerUser(string $name, string $email): void
+    {
+        $conn = require_once 'config/db_conn.php';
+        $this->conn = $conn;
+
+        // 1️⃣ Validate email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "❌ Invalid email address.";
+            return;
+        }
+
+        // 2️⃣ Check if user exists
+        $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            echo "⚠️ User already registered.";
+            return;
+        }
+        $stmt->close();
+
+        // 3️⃣ Insert into DB
+        $stmt = $this->conn->prepare("INSERT INTO users (name, email, created_at) VALUES (?, ?, NOW())");
+        $stmt->bind_param('ss', $name, $email);
+
+        if (!$stmt->execute()) {
+            echo "❌ Failed to register user: " . $stmt->error;
+            return;
+        }
+        $stmt->close();
+
+        // 4️⃣ Send customized welcome email
+        try {
+            $this->mailer->addAddress($email, $name);
+            $this->mailer->Subject = "Welcome to Our App, {$name}!";
+            $this->mailer->Body    = "
+                <h2>Hello {$name},</h2>
+                <p>You requested an account on ICS 2.2</p>
+                <p>In order to use this account you need to <a href=''>Click Here</a> to complete the registration process.</p>
+                <br>
+                <small>Regards,</small>
+                <br>
+                <small>Systems Admin</small>
+                <br>
+                <small>ICS 2.2</small>
+            ";
+            $this->mailer->AltBody = "Hello {$name},\n\nWelcome to our application!\n\n- The Team";
+
+            $this->mailer->send();
+            echo "✅ Registration successful. Email sent to {$email}.";
+        } catch (Exception $e) {
+            echo "✅ User saved, but email could not be sent. Error: {$this->mailer->ErrorInfo}";
+        }
+    }
 
 
     /*
