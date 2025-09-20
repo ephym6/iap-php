@@ -14,9 +14,6 @@ require 'plugins/PHPMailer/src/Exception.php';
 require 'plugins/PHPMailer/src/PHPMailer.php';
 require 'plugins/PHPMailer/src/SMTP.php';
 
-// Load DB connection (returns $conn)
-
-
 class Mail {
     private PHPMailer $mailer;
     private mysqli $conn;
@@ -24,9 +21,12 @@ class Mail {
     /**
      * @throws Exception
      */
-    public function __construct() {
+    public function __construct(mysqli $conn) {
+
+        $this->conn = $conn;
+
         //Load Composer's autoloader (created by composer, not included with PHPMailer)
-        if (file_exists('vendor/autoload.php')) {
+        if (file_exists('plugins/PHPMailer/vendor/autoload.php')) {
             require 'plugins/PHPMailer/vendor/autoload.php';
         } else {
             echo "Composer autoload not found. Please run 'composer update in `/plugins/PHPMailer`'.\n";
@@ -62,8 +62,6 @@ class Mail {
      */
     public function registerUser(string $name, string $email): void
     {
-        $conn = require_once 'config/db_conn.php';
-        $this->conn = $conn;
 
         // 1️⃣ Validate email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
