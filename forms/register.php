@@ -108,7 +108,8 @@ require_once  'ClassAutoLoad.php';
                                         Show Password
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <p>Already have an account? <a href="login">Login</a></p>
+                                <button type="submit" href="" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
