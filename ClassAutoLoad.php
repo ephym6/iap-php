@@ -3,7 +3,7 @@
 require 'config/config.php';
 $conn = require 'config/db_conn.php';
 
-$directory = array('Global', 'layouts', 'forms', 'config', 'tables');
+$directory = array('Global', 'layouts', 'forms', 'config', 'tables', 'routes');
 
 spl_autoload_register(function ($className) use ($directory) {
     foreach ($directory as $dir) {
