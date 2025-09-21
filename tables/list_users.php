@@ -1,9 +1,10 @@
 <?php
 
-$conn = require_once __DIR__ . '/../ClassAutoLoad.php';
+require_once __DIR__ . '/../ClassAutoLoad.php';
+$conn = require __DIR__ . '/../config/db_conn.php';
 
 // Fetch users with their creation date
-$result = $conn->query("SELECT id, name, email, created_at FROM users ORDER BY id ASC");
+$result = $conn->query("SELECT id, name, email, password, created_at FROM users ORDER BY id ASC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
