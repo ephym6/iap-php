@@ -17,7 +17,9 @@ $layout = new Layouts();
 $forms = new Forms();
 $mail = new Mail($conn);
 $register = new Register($conn);
+$login = new Login($conn);
 $router = new Router();
+
 
 // Define routes
 $router->add('home', function () {
@@ -31,9 +33,9 @@ $router->add('register', function() use ($register, $layout) {
     $layout->footer();
 });
 
-$router->add('login', function() use ($forms, $layout) {
+$router->add('login', function() use ($login, $layout) {
     $layout->header();
-    $forms->signIn();
+    $login->renderForm();
     $layout->footer();
 });
 
