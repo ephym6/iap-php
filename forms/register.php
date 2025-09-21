@@ -45,18 +45,33 @@ class Register {
         <head>
             <meta charset="UTF-8">
             <title>User Registration</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         </head>
-        <body>
-        <h2>Register</h2>
-        <form method="post" action="">
-            <label>Name:
-                <input type="text" name="name" required>
-            </label><br><br>
-            <label>Email:
-                <input type="email" name="email" required>
-            </label><br><br>
-            <button type="submit">Register</button>
-        </form>
+        <body class="bg-light">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h2 class="mb-4 text-center">Register</h2>
+                            <form method="post" action="">
+                                <div class="mb-3">
+                                    <label for="nameInput" class="form-label">Name</label>
+                                    <input type="text" name="name" class="form-control" id="nameInput" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailInput" class="form-label">Email address</label>
+                                    <input type="email" name="email" class="form-control" id="emailInput" aria-describedby="emailHelp" required>
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </body>
         </html>
         <?php
