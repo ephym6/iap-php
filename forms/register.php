@@ -66,12 +66,47 @@ require_once  'ClassAutoLoad.php';
                             <form method="post" action="">
                                 <div class="mb-3">
                                     <label for="nameInput" class="form-label">Name</label>
-                                    <input type="text" name="name" class="form-control" id="nameInput" required>
+                                    <input
+                                            type="text"
+                                            name="name"
+                                            class="form-control"
+                                            id="nameInput"
+                                            required
+                                    >
                                 </div>
                                 <div class="mb-3">
                                     <label for="emailInput" class="form-label">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="emailInput" aria-describedby="emailHelp" required>
+                                    <input
+                                            type="email"
+                                            name="email"
+                                            class="form-control"
+                                            id="emailInput"
+                                            aria-describedby="emailHelp"
+                                            required
+                                    >
                                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="passwordInput" class="form-label">Password</label>
+                                    <input
+                                            type="password"
+                                            name="password"
+                                            class="form-control"
+                                            id="passwordInput"
+                                            placeholder="Enter your password"
+                                            required
+                                    >
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            id="showPasswordCheck"
+                                            onclick="togglePassword()"
+                                    >
+                                    <label class="form-check-label" for="showPasswordCheck">
+                                        Show Password
+                                    </label>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -80,6 +115,12 @@ require_once  'ClassAutoLoad.php';
                 </div>
             </div>
         </div>
+        <script>
+            function togglePassword() {
+                const passwordField = document.getElementById('passwordInput');
+                passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+            }
+        </script>
         </body>
         </html>
         <?php
