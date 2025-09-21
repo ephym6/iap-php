@@ -107,6 +107,7 @@ $RECYCLE.BIN/
 
 # Ignore sensitive configs
 config/mail_config.php
+config/db_pass.php
 
 # ===========================
 # Optional: Frontend (uncomment if applicable)

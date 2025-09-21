@@ -12,10 +12,11 @@ const SITE_EMAIL = 'info@iap.com';
 const SITE_LANG = 'en';
 
 // Database configuration
+$db = include 'config/db_pass.php';
 const DB_TYPE = 'mysql';
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
-const DB_PASS = 'student';
+define("DB_PASS", $db['password']);
 const DB_NAME = 'ics_app';
 
 /*
