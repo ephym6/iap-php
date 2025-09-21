@@ -60,7 +60,7 @@ class Mail {
     /**
      * Validate email, insert user and send a welcome email
      */
-    public function registerUser(string $name, string $email): string
+    public function registerUser(string $name, string $email, string $password): string
     {
 
         // 1️⃣ Validate email
@@ -80,8 +80,9 @@ class Mail {
         $stmt->close();
 
         // 3️⃣ Insert into DB
-        $stmt = $this->conn->prepare("INSERT INTO users (name, email, created_at) VALUES (?, ?, NOW())");
-        $stmt->bind_param('ss', $name, $email);
+        $hashed = password_hash($password, PASSWORD_DEFAULT); // Hash password
+        $stmt = $this->conn->prepare("INSERT INTO users (name, email, password, created_at) VALUES (?, ?, ?, NOW())");
+        $stmt->bind_param('sss', $name, $email, $hashed);
 
         if (!$stmt->execute()) {
             return "❌ Failed to register user: " . $stmt->error;
