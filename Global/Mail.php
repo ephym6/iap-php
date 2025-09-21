@@ -60,13 +60,12 @@ class Mail {
     /**
      * Validate email, insert user and send a welcome email
      */
-    public function registerUser(string $name, string $email): void
+    public function registerUser(string $name, string $email): string
     {
 
         // 1️⃣ Validate email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "❌ Invalid email address.";
-            return;
+            return "❌ Invalid email address.";
         }
 
         // 2️⃣ Check if user exists
@@ -76,8 +75,7 @@ class Mail {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            echo "⚠️ User already registered.";
-            return;
+            return "⚠️ User already registered.";
         }
         $stmt->close();
 
@@ -86,8 +84,7 @@ class Mail {
         $stmt->bind_param('ss', $name, $email);
 
         if (!$stmt->execute()) {
-            echo "❌ Failed to register user: " . $stmt->error;
-            return;
+            return "❌ Failed to register user: " . $stmt->error;
         }
         $stmt->close();
 
@@ -109,9 +106,9 @@ class Mail {
             $this->mailer->AltBody = "Hello {$name},\n\nWelcome to our application!\n\n- The Team";
 
             $this->mailer->send();
-            echo "✅ Registration successful. Email sent to {$email}.";
+            return "✅ Registration successful. Email sent to {$email}.";
         } catch (Exception $e) {
-            echo "✅ User saved, but email could not be sent. Error: {$this->mailer->ErrorInfo}";
+            return "✅ User saved, but email could not be sent. Error: {$this->mailer->ErrorInfo}";
         }
     }
 
