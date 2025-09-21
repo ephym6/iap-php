@@ -2,7 +2,7 @@
 
 require_once  'ClassAutoLoad.php';
 
-class Register {
+#[AllowDynamicProperties] class Register {
     private Mail $mailer;
     private mysqli $conn;
 
@@ -26,11 +26,11 @@ class Register {
             $email = trim($_POST['email'] ?? '');
 
             if (empty($name) || empty($email)) {
-                echo "❌ Name and email are required.";
+                $this->message = "❌ Name and email are required.";
                 return;
             }
 
-            $this->mailer->registerUser($name, $email);
+            $this->message = $this->mailer->registerUser($name, $email);
         }
     }
 
@@ -55,6 +55,13 @@ class Register {
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h2 class="mb-4 text-center">Register</h2>
+
+                            <?php if (!empty($this->message)): ?>
+                                <div class="alert alert-info">
+                                    <?php echo htmlspecialchars($this->message); ?>
+                                </div>
+                            <?php endif; ?>
+
                             <form method="post" action="">
                                 <div class="mb-3">
                                     <label for="nameInput" class="form-label">Name</label>
