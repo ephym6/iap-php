@@ -24,13 +24,14 @@ require_once  'ClassAutoLoad.php';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name  = trim($_POST['name'] ?? '');
             $email = trim($_POST['email'] ?? '');
+            $password = trim($_POST['password'] ?? '');
 
-            if (empty($name) || empty($email)) {
-                $this->message = "❌ Name and email are required.";
+            if (empty($name) || empty($email) || empty($password)) {
+                $this->message = "❌ Name, email and password are required.";
                 return;
             }
 
-            $this->message = $this->mailer->registerUser($name, $email);
+            $this->message = $this->mailer->registerUser($name, $email, $password);
         }
     }
 
